@@ -1,0 +1,18 @@
+[
+  {"name": "AI Tools", "slug": "ai-tools", "count": 28, "icon": "🤖"},
+  {"name": "Image Generation", "slug": "image-generation", "count": 12, "icon": "🖼️"},
+  {"name": "Video", "slug": "video", "count": 15, "icon": "🎬"},
+  {"name": "Writing", "slug": "writing", "count": 8, "icon": "✍️"},
+  {"name": "Development", "slug": "development", "count": 9, "icon": "💻"},
+  {"name": "Marketing", "slug": "marketing", "count": 11, "icon": "📣"},
+  {"name": "Productivity", "slug": "productivity", "count": 11, "icon": "⚡"},
+  {"name": "Design", "slug": "design", "count": 13, "icon": "🎨"},
+  {"name": "SEO", "slug": "seo", "count": 5, "icon": "📈"},
+  {"name": "Game", "slug": "game", "count": 4, "icon": "🎮"},
+  {"name": "Data Analysis", "slug": "data-analysis", "count": 6, "icon": "📊"},
+  {"name": "Chatbot", "slug": "chatbot", "count": 5, "icon": "💬"},
+  {"name": "Social Media", "slug": "social-media", "count": 7, "icon": "🌐"},
+  {"name": "Automation", "slug": "automation", "count": 8, "icon": "🔄"},
+  {"name": "Audio", "slug": "audio", "count": 5, "icon": "🎵"},
+  {"name": "3D", "slug": "3d", "count": 3, "icon": "🎲"}
+]
