@@ -1,4 +1,8 @@
+"use client";
+
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import toolsData from "@/data/tools.json";
 import categoriesData from "@/data/categories.json";
 
@@ -23,10 +27,10 @@ function ToolCard({ tool, index }: { tool: typeof toolsData[0]; index: number })
   return (
     <Link
       href={`/tool/${tool.slug}`}
-      className="group flex flex-col gap-3 rounded-xl border border-border/50 bg-card p-5 hover:border-violet-500/30 hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-200"
+      className="group flex flex-col gap-3 rounded-xl border border-border/50 bg-card p-5 hover:border-violet-500/30 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-200"
     >
       <div className="flex items-start justify-between gap-2">
-        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-violet-600/20 to-fuchsia-600/20 text-violet-500 font-bold text-sm">
+        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-violet-600/20 to-fuchsia-600/20 text-violet-500 font-bold text-sm shrink-0">
           {tool.name.slice(0, 2).toUpperCase()}
         </div>
         <span className={`text-xs font-medium px-2 py-0.5 rounded-full shrink-0 ${color}`}>
@@ -72,6 +76,16 @@ function LeaderboardItem({ tool, index }: { tool: typeof toolsData[0]; index: nu
 }
 
 export default function HomePage() {
+  const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+    }
+  };
+
   return (
     <div className="flex flex-col gap-16 pb-16">
       {/* Hero */}
@@ -83,7 +97,7 @@ export default function HomePage() {
 
         <div className="mx-auto max-w-3xl text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-1 text-xs text-violet-500 mb-6">
-            <span>🚀</span> 29 tools submitted today
+            <span>🔥</span> 29 tools submitted today
           </div>
           <h1 className="text-4xl sm:text-6xl font-bold tracking-tight leading-tight">
             Discover the Best<br />
@@ -96,16 +110,18 @@ export default function HomePage() {
           </p>
 
           {/* Search */}
-          <div className="mt-8 relative max-w-xl mx-auto">
+          <form onSubmit={handleSearch} className="mt-8 relative max-w-xl mx-auto">
             <input
               type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search AI tools, categories, tags..."
               className="w-full h-12 pl-12 pr-4 rounded-xl border border-border/50 bg-card text-sm focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500 transition-all"
             />
             <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
-          </div>
+          </form>
 
           {/* Quick stats */}
           <div className="flex items-center justify-center gap-8 mt-6 text-sm">
@@ -136,10 +152,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Two-col layout: All Tools + Leaderboard */}
+      {/* Two-col layout: Latest Tools + Leaderboard */}
       <section className="px-4 sm:px-6">
         <div className="mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* All tools grid */}
+          {/* Latest tools grid */}
           <div className="lg:col-span-2">
             <div className="flex items-center justify-between mb-6">
               <div>
@@ -214,16 +230,16 @@ export default function HomePage() {
             </div>
             <h2 className="text-2xl font-bold">Get the best tools in your inbox</h2>
             <p className="mt-2 text-sm text-muted-foreground">Weekly curated list of the hottest AI tools and indie products. No spam.</p>
-            <div className="mt-6 flex gap-2 max-w-sm mx-auto">
+            <form className="mt-6 flex gap-2 max-w-sm mx-auto" onSubmit={(e) => e.preventDefault()}>
               <input
                 type="email"
                 placeholder="your@email.com"
                 className="flex-1 h-10 px-3 rounded-lg border border-border/50 bg-background text-sm focus:outline-none focus:ring-2 focus:ring-violet-500/50"
               />
-              <button className="h-10 px-5 rounded-lg bg-violet-600 hover:bg-violet-700 text-white text-sm font-medium transition-colors whitespace-nowrap">
+              <button type="submit" className="h-10 px-5 rounded-lg bg-violet-600 hover:bg-violet-700 text-white text-sm font-medium transition-colors whitespace-nowrap">
                 Subscribe
               </button>
-            </div>
+            </form>
           </div>
         </div>
       </section>

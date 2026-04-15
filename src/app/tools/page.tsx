@@ -1,11 +1,53 @@
+"use client";
+
 import Link from "next/link";
+import { useState, useMemo } from "react";
 import toolsData from "@/data/tools.json";
 import categoriesData from "@/data/categories.json";
 
-export default function ToolsPage() {
-  const sorted = [...toolsData].sort((a, b) => b.votes - a.votes);
+type SortOption = "votes" | "views" | "newest";
+type PricingFilter = "All" | "Free" | "Paid" | "Freemium" | "Featured" | "Trial";
 
-  const pricingFilters = ["All", "Free", "Paid", "Freemium", "Featured"];
+export default function ToolsPage() {
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedPricing, setSelectedPricing] = useState<PricingFilter>("All");
+  const [sortBy, setSortBy] = useState<SortOption>("votes");
+
+  const filteredTools = useMemo(() => {
+    let result = [...toolsData];
+
+    if (selectedCategory) {
+      result = result.filter(
+        (t) => t.category.toLowerCase().replace(/\s+/g, "-") === selectedCategory
+      );
+    }
+
+    if (selectedPricing !== "All") {
+      result = result.filter((t) => t.pricing === selectedPricing);
+    }
+
+    switch (sortBy) {
+      case "votes":
+        result.sort((a, b) => b.votes - a.votes);
+        break;
+      case "views":
+        result.sort((a, b) => b.views - a.views);
+        break;
+      case "newest":
+        // Assume tools are already in somewhat random order as "newest"
+        break;
+    }
+
+    return result;
+  }, [selectedCategory, selectedPricing, sortBy]);
+
+  const sortOptions: { value: SortOption; label: string }[] = [
+    { value: "votes", label: "Most Voted" },
+    { value: "views", label: "Most Viewed" },
+    { value: "newest", label: "Newest" },
+  ];
+
+  const pricingFilters: PricingFilter[] = ["All", "Free", "Paid", "Freemium", "Featured", "Trial"];
 
   return (
     <div className="min-h-screen">
@@ -29,19 +71,30 @@ export default function ToolsPage() {
                 <h3 className="text-sm font-semibold mb-3">Categories</h3>
                 <ul className="space-y-1">
                   <li>
-                    <Link href="/tools" className="block text-sm px-3 py-1.5 rounded-lg bg-violet-500/10 text-violet-500 font-medium">
+                    <button
+                      onClick={() => setSelectedCategory(null)}
+                      className={`w-full text-left text-sm px-3 py-1.5 rounded-lg transition-colors ${
+                        selectedCategory === null
+                          ? "bg-violet-500/10 text-violet-500 font-medium"
+                          : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                      }`}
+                    >
                       All ({toolsData.length})
-                    </Link>
+                    </button>
                   </li>
                   {categoriesData.map((cat) => (
                     <li key={cat.slug}>
-                      <Link
-                        href={`/category/${cat.slug}`}
-                        className="flex items-center justify-between text-sm px-3 py-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                      <button
+                        onClick={() => setSelectedCategory(cat.slug)}
+                        className={`w-full flex items-center justify-between text-sm px-3 py-1.5 rounded-lg transition-colors ${
+                          selectedCategory === cat.slug
+                            ? "bg-violet-500/10 text-violet-500 font-medium"
+                            : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                        }`}
                       >
                         <span>{cat.icon} {cat.name}</span>
                         <span className="text-xs text-muted-foreground">{cat.count}</span>
-                      </Link>
+                      </button>
                     </li>
                   ))}
                 </ul>
@@ -53,7 +106,14 @@ export default function ToolsPage() {
                 <ul className="space-y-1">
                   {pricingFilters.map((p) => (
                     <li key={p}>
-                      <button className={`w-full text-left text-sm px-3 py-1.5 rounded-lg transition-colors ${p === "All" ? "bg-violet-500/10 text-violet-500 font-medium" : "text-muted-foreground hover:text-foreground hover:bg-muted"}`}>
+                      <button
+                        onClick={() => setSelectedPricing(p)}
+                        className={`w-full text-left text-sm px-3 py-1.5 rounded-lg transition-colors ${
+                          selectedPricing === p
+                            ? "bg-violet-500/10 text-violet-500 font-medium"
+                            : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                        }`}
+                      >
                         {p}
                       </button>
                     </li>
@@ -67,53 +127,73 @@ export default function ToolsPage() {
           <div className="flex-1">
             {/* Sort bar */}
             <div className="flex items-center justify-between mb-4">
-              <p className="text-sm text-muted-foreground">{sorted.length} tools</p>
+              <p className="text-sm text-muted-foreground">{filteredTools.length} tools</p>
               <div className="flex gap-2">
-                {["Most Voted", "Most Viewed", "Newest"].map((s) => (
-                  <button key={s} className={`text-xs px-3 py-1.5 rounded-lg border transition-colors ${s === "Most Voted" ? "border-violet-500/50 bg-violet-500/10 text-violet-500" : "border-border text-muted-foreground hover:border-violet-500/30"}`}>
-                    {s}
+                {sortOptions.map((opt) => (
+                  <button
+                    key={opt.value}
+                    onClick={() => setSortBy(opt.value)}
+                    className={`text-xs px-3 py-1.5 rounded-lg border transition-colors ${
+                      sortBy === opt.value
+                        ? "border-violet-500/50 bg-violet-500/10 text-violet-500"
+                        : "border-border text-muted-foreground hover:border-violet-500/30"
+                    }`}
+                  >
+                    {opt.label}
                   </button>
                 ))}
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-              {sorted.map((tool) => {
-                const pricingColors: Record<string, string> = {
-                  Free: "bg-emerald-500/10 text-emerald-500",
-                  Paid: "bg-amber-500/10 text-amber-500",
-                  Freemium: "bg-blue-500/10 text-blue-500",
-                  Featured: "bg-violet-500/10 text-violet-500",
-                  Trial: "bg-orange-500/10 text-orange-500",
-                };
-                const color = pricingColors[tool.pricing] || "bg-muted text-muted-foreground";
+            {filteredTools.length === 0 ? (
+              <div className="text-center py-16">
+                <p className="text-muted-foreground">No tools found matching your filters.</p>
+                <button
+                  onClick={() => { setSelectedCategory(null); setSelectedPricing("All"); }}
+                  className="mt-4 text-sm text-violet-500 hover:text-violet-400"
+                >
+                  Clear filters
+                </button>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+                {filteredTools.map((tool) => {
+                  const pricingColors: Record<string, string> = {
+                    Free: "bg-emerald-500/10 text-emerald-500",
+                    Paid: "bg-amber-500/10 text-amber-500",
+                    Freemium: "bg-blue-500/10 text-blue-500",
+                    Featured: "bg-violet-500/10 text-violet-500",
+                    Trial: "bg-orange-500/10 text-orange-500",
+                  };
+                  const color = pricingColors[tool.pricing] || "bg-muted text-muted-foreground";
 
-                return (
-                  <Link
-                    key={tool.slug}
-                    href={`/tool/${tool.slug}`}
-                    className="group flex flex-col gap-3 rounded-xl border border-border/50 bg-card p-5 hover:border-violet-500/30 hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-200"
-                  >
-                    <div className="flex items-start justify-between gap-2">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-violet-600/20 to-fuchsia-600/20 text-violet-500 font-bold text-sm shrink-0">
-                        {tool.name.slice(0, 2).toUpperCase()}
+                  return (
+                    <Link
+                      key={tool.slug}
+                      href={`/tool/${tool.slug}`}
+                      className="group flex flex-col gap-3 rounded-xl border border-border/50 bg-card p-5 hover:border-violet-500/30 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-200"
+                    >
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-violet-600/20 to-fuchsia-600/20 text-violet-500 font-bold text-sm shrink-0">
+                          {tool.name.slice(0, 2).toUpperCase()}
+                        </div>
+                        <span className={`text-xs font-medium px-2 py-0.5 rounded-full shrink-0 ${color}`}>
+                          {tool.pricing}
+                        </span>
                       </div>
-                      <span className={`text-xs font-medium px-2 py-0.5 rounded-full shrink-0 ${color}`}>
-                        {tool.pricing}
-                      </span>
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-sm group-hover:text-violet-500 transition-colors">{tool.name}</h3>
-                      <p className="text-xs text-muted-foreground mt-1 line-clamp-2 leading-relaxed">{tool.desc}</p>
-                    </div>
-                    <div className="flex items-center gap-3 text-xs text-muted-foreground mt-auto">
-                      <span className="bg-muted px-2 py-0.5 rounded">{tool.category}</span>
-                      <span className="ml-auto">↑ {tool.votes} votes</span>
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
+                      <div>
+                        <h3 className="font-semibold text-sm group-hover:text-violet-500 transition-colors">{tool.name}</h3>
+                        <p className="text-xs text-muted-foreground mt-1 line-clamp-2 leading-relaxed">{tool.desc}</p>
+                      </div>
+                      <div className="flex items-center gap-3 text-xs text-muted-foreground mt-auto">
+                        <span className="bg-muted px-2 py-0.5 rounded">{tool.category}</span>
+                        <span className="ml-auto">↑ {tool.votes} votes</span>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            )}
           </div>
         </div>
       </div>
