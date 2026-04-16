@@ -1,0 +1,186 @@
+{
+  "name": "turbo0",
+  "url": "https://turbo0.com/",
+  "data": {
+    "header": {
+      "position": "static",
+      "background": "rgb(255, 255, 255) none repeat scroll 0% 0% / auto padding-box border-box",
+      "backdropFilter": "none",
+      "borderBottom": "0px solid rgb(228, 228, 231)",
+      "height": "64px",
+      "padding": "0px 0px 0px 0px",
+      "boxShadow": "none"
+    },
+    "navLinks": [
+      {
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "color": "rgb(9, 9, 11)",
+        "padding": "0px",
+        "textDecoration": "none"
+      },
+      {
+        "fontSize": "16px",
+        "fontWeight": "600",
+        "color": "rgb(9, 9, 11)",
+        "padding": "8px",
+        "textDecoration": "none"
+      },
+      {
+        "fontSize": "16px",
+        "fontWeight": "500",
+        "color": "rgba(9, 9, 11, 0.6)",
+        "padding": "8px",
+        "textDecoration": "none"
+      },
+      {
+        "fontSize": "16px",
+        "fontWeight": "500",
+        "color": "rgba(9, 9, 11, 0.6)",
+        "padding": "8px",
+        "textDecoration": "none"
+      },
+      {
+        "fontSize": "16px",
+        "fontWeight": "500",
+        "color": "rgba(9, 9, 11, 0.6)",
+        "padding": "8px",
+        "textDecoration": "none"
+      },
+      {
+        "fontSize": "16px",
+        "fontWeight": "500",
+        "color": "rgba(9, 9, 11, 0.6)",
+        "padding": "8px",
+        "textDecoration": "none"
+      },
+      {
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "color": "rgb(9, 9, 11)",
+        "padding": "0px",
+        "textDecoration": "none"
+      }
+    ],
+    "hero": {
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "backgroundImage": "none",
+      "padding": "0px 0px 0px 0px",
+      "textAlign": "start",
+      "minHeight": "auto",
+      "display": "block",
+      "alignItems": "normal",
+      "justifyContent": "normal",
+      "flexDirection": "row"
+    },
+    "h1": {
+      "fontSize": "48px",
+      "fontWeight": "700",
+      "fontFamily": "__fontSourceSans_9d2ffe, __fontSourceSans_Fallback_9d2ffe, ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+      "lineHeight": "48px",
+      "color": "rgb(9, 9, 11)",
+      "margin": "0px",
+      "textAlign": "center",
+      "letterSpacing": "normal"
+    },
+    "h1Text": "Turbo Startup Creating Any Content",
+    "card": {
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "borderRadius": "0px",
+      "border": "0px solid rgb(228, 228, 231)",
+      "boxShadow": "none",
+      "padding": "0px 16px 0px 16px",
+      "margin": "0px 80px",
+      "width": "1280px",
+      "display": "flex",
+      "gap": "normal",
+      "flexDirection": "row",
+      "alignItems": "center",
+      "justifyContent": "space-between"
+    },
+    "cardDesc": {
+      "fontSize": "20px",
+      "color": "rgb(9, 9, 11)",
+      "lineHeight": "28px",
+      "fontFamily": "__fontBricolageGrotesque_23cd1b, __fontBricolageGrotesque_Fallback_23cd1b"
+    },
+    "cardBadge": {
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "color": "rgb(9, 9, 11)",
+      "borderRadius": "0px",
+      "padding": "0px",
+      "fontSize": "20px",
+      "fontWeight": "700",
+      "border": "0px solid rgb(228, 228, 231)"
+    },
+    "cardImage": {
+      "width": "32px",
+      "height": "32px",
+      "borderRadius": "14px"
+    },
+    "button": {
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "color": "rgba(9, 9, 11, 0.6)",
+      "borderRadius": "14px",
+      "border": "0px solid rgb(228, 228, 231)",
+      "padding": "8px 8px 8px 8px",
+      "fontSize": "16px",
+      "fontWeight": "500",
+      "boxShadow": "none",
+      "display": "inline-flex",
+      "cursor": "pointer"
+    },
+    "container": {
+      "display": "flex",
+      "gridTemplateColumns": "none",
+      "gridTemplateRows": "none",
+      "gap": "normal",
+      "maxWidth": "1280px",
+      "padding": "0px 16px 0px 16px",
+      "margin": "0px 80px",
+      "width": "1280px"
+    },
+    "footer": {
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "padding": "0px 0px 0px 0px",
+      "borderTop": "1px solid rgb(228, 228, 231)",
+      "color": "rgb(9, 9, 11)"
+    },
+    "footerLinks": [
+      {
+        "fontSize": "16px",
+        "color": "rgb(9, 9, 11)"
+      },
+      {
+        "fontSize": "16px",
+        "color": "rgb(9, 9, 11)"
+      },
+      {
+        "fontSize": "16px",
+        "color": "rgb(9, 9, 11)"
+      },
+      {
+        "fontSize": "16px",
+        "color": "rgb(9, 9, 11)"
+      },
+      {
+        "fontSize": "14px",
+        "color": "rgb(113, 113, 122)"
+      },
+      {
+        "fontSize": "14px",
+        "color": "rgb(113, 113, 122)"
+      }
+    ],
+    "body": {
+      "backgroundColor": "rgb(255, 255, 255)",
+      "fontFamily": "__fontBricolageGrotesque_23cd1b, __fontBricolageGrotesque_Fallback_23cd1b",
+      "color": "rgb(9, 9, 11)"
+    }
+  },
+  "success": true
+}

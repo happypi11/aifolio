@@ -1,0 +1,181 @@
+{
+  "name": "dangai",
+  "url": "https://dang.ai/",
+  "data": {
+    "header": {
+      "position": "absolute",
+      "background": "rgba(18, 18, 23, 0.95) none repeat scroll 0% 0% / auto padding-box border-box",
+      "backdropFilter": "none",
+      "borderBottom": "0px none rgb(240, 238, 232)",
+      "height": "900px",
+      "padding": "0px 0px 0px 0px",
+      "boxShadow": "none"
+    },
+    "navLinks": [
+      {
+        "fontSize": "40px",
+        "fontWeight": "400",
+        "color": "rgb(240, 238, 232)",
+        "padding": "0px",
+        "textDecoration": "none"
+      },
+      {
+        "fontSize": "40px",
+        "fontWeight": "400",
+        "color": "rgb(240, 238, 232)",
+        "padding": "0px",
+        "textDecoration": "none"
+      },
+      {
+        "fontSize": "40px",
+        "fontWeight": "400",
+        "color": "rgb(240, 238, 232)",
+        "padding": "0px",
+        "textDecoration": "none"
+      },
+      {
+        "fontSize": "40px",
+        "fontWeight": "400",
+        "color": "rgb(240, 238, 232)",
+        "padding": "0px",
+        "textDecoration": "none"
+      },
+      {
+        "fontSize": "40px",
+        "fontWeight": "400",
+        "color": "rgb(240, 238, 232)",
+        "padding": "0px",
+        "textDecoration": "none"
+      },
+      {
+        "fontSize": "40px",
+        "fontWeight": "400",
+        "color": "rgb(240, 238, 232)",
+        "padding": "0px",
+        "textDecoration": "none"
+      },
+      {
+        "fontSize": "40px",
+        "fontWeight": "400",
+        "color": "rgb(240, 238, 232)",
+        "padding": "0px",
+        "textDecoration": "none"
+      },
+      {
+        "fontSize": "40px",
+        "fontWeight": "400",
+        "color": "rgb(240, 238, 232)",
+        "padding": "0px",
+        "textDecoration": "none"
+      }
+    ],
+    "hero": {
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "backgroundImage": "none",
+      "padding": "0px 0px 0px 0px",
+      "textAlign": "start",
+      "minHeight": "0px",
+      "display": "block",
+      "alignItems": "normal",
+      "justifyContent": "normal",
+      "flexDirection": "row"
+    },
+    "h1": {
+      "fontSize": "56px",
+      "fontWeight": "500",
+      "fontFamily": "Lato, sans-serif",
+      "lineHeight": "67.2px",
+      "color": "rgb(240, 238, 232)",
+      "margin": "0px",
+      "textAlign": "start",
+      "letterSpacing": "-0.4px"
+    },
+    "h1Text": "AI tools directory",
+    "search": {
+      "width": "100%",
+      "height": "100%",
+      "borderRadius": "6px",
+      "border": "1px solid rgb(145, 141, 132)",
+      "background": "rgb(18, 18, 23) none repeat scroll 0% 0% / auto padding-box border-box",
+      "backgroundColor": "rgb(18, 18, 23)",
+      "padding": "32px 16px 32px 16px",
+      "fontSize": "16px",
+      "color": "rgb(240, 238, 232)",
+      "outline": "rgb(240, 238, 232) none 3px",
+      "boxShadow": "none"
+    },
+    "searchPlaceholder": "ex. john smith",
+    "card": {
+      "background": "linear-gradient(rgb(41, 37, 37), rgb(19, 21, 25)) repeat scroll 0% 0% / auto padding-box padding-box, rgba(0, 0, 0, 0) linear-gradient(rgb(51, 53, 58), rgba(0, 0, 0, 0)) repeat scroll 0% 0% / auto border-box border-box",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "borderRadius": "8px",
+      "border": "1px solid rgba(0, 0, 0, 0)",
+      "boxShadow": "none",
+      "padding": "24px 24px 24px 24px",
+      "margin": "0px",
+      "width": "auto",
+      "display": "flex",
+      "gap": "normal",
+      "flexDirection": "column",
+      "alignItems": "normal",
+      "justifyContent": "space-between"
+    },
+    "cardDesc": {
+      "fontSize": "12px",
+      "color": "rgb(240, 238, 232)",
+      "lineHeight": "12px",
+      "fontFamily": "Lato, sans-serif"
+    },
+    "cardBadge": {
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "color": "rgb(240, 238, 232)",
+      "borderRadius": "0px",
+      "padding": "0px",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "border": "0px none rgb(240, 238, 232)"
+    },
+    "cardImage": {
+      "width": "24px",
+      "height": "24px",
+      "borderRadius": "0px"
+    },
+    "button": {
+      "background": "rgb(106, 35, 231) none repeat scroll 0% 0% / auto padding-box border-box",
+      "backgroundColor": "rgb(106, 35, 231)",
+      "color": "rgb(255, 255, 255)",
+      "borderRadius": "100%",
+      "border": "0px none rgb(255, 255, 255)",
+      "padding": "0px 0px 0px 0px",
+      "fontSize": "20px",
+      "fontWeight": "400",
+      "boxShadow": "none",
+      "display": "flex",
+      "cursor": "pointer"
+    },
+    "container": {
+      "display": "block",
+      "gridTemplateColumns": "none",
+      "gridTemplateRows": "none",
+      "gap": "normal",
+      "maxWidth": "none",
+      "padding": "0px 0px 0px 0px",
+      "margin": "0px",
+      "width": "1440px"
+    },
+    "body": {
+      "backgroundColor": "rgb(18, 18, 23)",
+      "fontFamily": "Lato, sans-serif",
+      "color": "rgb(240, 238, 232)"
+    },
+    "sidebar": {
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "padding": "0px 0px 0px 64px",
+      "width": "452px",
+      "borderRight": "0px none rgb(240, 238, 232)"
+    }
+  },
+  "success": true
+}

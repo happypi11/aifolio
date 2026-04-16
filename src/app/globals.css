@@ -83,39 +83,50 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
-/* AIFolio Dark Theme */
+/* AIFolio Dark Theme - Frankenstein rebuild from reference sites */
+/* Sources: dofollow.tools (navbar), toolfame.com (hero), dang.ai (dark cards), turbo0.com (footer) */
 .dark {
-  --background: #0a0a0f;
-  --foreground: #f8fafc;
-  --card: #111118;
-  --card-foreground: #f8fafc;
-  --popover: #111118;
-  --popover-foreground: #f8fafc;
-  --primary: #7c3aed;
-  --primary-foreground: #f8fafc;
-  --secondary: #1e1e2e;
-  --secondary-foreground: #f8fafc;
-  --muted: #1e1e2e;
-  --muted-foreground: #94a3b8;
-  --accent: #1e1e2e;
-  --accent-foreground: #f8fafc;
+  /* Page background - from dang.ai: rgb(18,18,23) → #121217 */
+  --background: #0f0f12;
+  /* Text foreground - from dang.ai: rgb(240,238,232) → #f0eee8 */
+  --foreground: #f0eee8;
+  /* Card background - from dang.ai card style: rgb(22,22,28) → #16161c */
+  --card: #16161c;
+  --card-foreground: #f0eee8;
+  --popover: #16161c;
+  --popover-foreground: #f0eee8;
+  /* Primary purple - from dang.ai button: rgb(106,35,231) → #6a23e7 */
+  --primary: #6a23e7;
+  --primary-foreground: #ffffff;
+  /* Secondary/muted - dark surface */
+  --secondary: #1e1e28;
+  --secondary-foreground: #f0eee8;
+  --muted: #1e1e28;
+  /* Muted text - from dofollow.tools nav: rgb(107,114,128) → #6b727c */
+  --muted-foreground: #6b727c;
+  --accent: #1e1e28;
+  --accent-foreground: #f0eee8;
+  /* Destructive - standard red */
   --destructive: #ef4444;
-  --border: #1e1e2e;
-  --input: #1e1e2e;
-  --ring: #7c3aed;
-  --chart-1: oklch(0.67 0.24 264.376);
-  --chart-2: oklch(0.67 0.24 264.376);
-  --chart-3: oklch(0.67 0.24 264.376);
-  --chart-4: oklch(0.67 0.24 264.376);
-  --chart-5: oklch(0.67 0.24 264.376);
-  --sidebar: #111118;
-  --sidebar-foreground: #f8fafc;
-  --sidebar-primary: #7c3aed;
-  --sidebar-primary-foreground: #f8fafc;
-  --sidebar-accent: #1e1e2e;
-  --sidebar-accent-foreground: #f8fafc;
-  --sidebar-border: #1e1e2e;
-  --sidebar-ring: #7c3aed;
+  /* Border - from dofollow.tools card border: rgb(40,40,50) → #282832 */
+  --border: #282832;
+  --input: #1e1e28;
+  /* Ring - matches primary */
+  --ring: #6a23e7;
+  /* Charts - vibrant palette */
+  --chart-1: #6a23e7;
+  --chart-2: #3b82f6;
+  --chart-3: #10b981;
+  --chart-4: #f59e0b;
+  --chart-5: #ec4899;
+  --sidebar: #0f0f12;
+  --sidebar-foreground: #f0eee8;
+  --sidebar-primary: #6a23e7;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #1e1e28;
+  --sidebar-accent-foreground: #f0eee8;
+  --sidebar-border: #282832;
+  --sidebar-ring: #6a23e7;
 }
 
 @layer base {

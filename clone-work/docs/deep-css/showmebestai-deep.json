@@ -1,0 +1,7 @@
+{
+  "name": "showmebestai",
+  "url": "https://showmebestai.com/",
+  "data": null,
+  "success": false,
+  "error": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://showmebestai.com/\nCall log:\n  - navigating to \"https://showmebestai.com/\", waiting until \"domcontentloaded\"\n"
+}

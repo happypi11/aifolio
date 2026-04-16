@@ -1,0 +1,132 @@
+{
+  "name": "fazier",
+  "url": "https://fazier.com/",
+  "data": {
+    "header": {
+      "position": "sticky",
+      "background": "rgb(255, 255, 255) none repeat scroll 0% 0% / auto padding-box border-box",
+      "backdropFilter": "none",
+      "borderBottom": "1px solid rgb(224, 227, 234)",
+      "height": "67px",
+      "padding": "8px 0px 8px 0px",
+      "boxShadow": "none"
+    },
+    "navLinks": [
+      {
+        "fontSize": "20px",
+        "fontWeight": "400",
+        "color": "rgb(0, 0, 0)",
+        "padding": "0px",
+        "textDecoration": "none"
+      },
+      {
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "color": "rgb(0, 72, 255)",
+        "padding": "8px",
+        "textDecoration": "none"
+      },
+      {
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "color": "rgb(255, 255, 255)",
+        "padding": "8px",
+        "textDecoration": "none"
+      },
+      {
+        "fontSize": "16px",
+        "fontWeight": "500",
+        "color": "rgba(0, 0, 0, 0.65)",
+        "padding": "8px",
+        "textDecoration": "none"
+      },
+      {
+        "fontSize": "16px",
+        "fontWeight": "500",
+        "color": "rgba(0, 0, 0, 0.65)",
+        "padding": "8px",
+        "textDecoration": "none"
+      },
+      {
+        "fontSize": "16px",
+        "fontWeight": "500",
+        "color": "rgba(0, 0, 0, 0.65)",
+        "padding": "8px",
+        "textDecoration": "none"
+      },
+      {
+        "fontSize": "16px",
+        "fontWeight": "500",
+        "color": "rgba(0, 0, 0, 0.65)",
+        "padding": "8px",
+        "textDecoration": "none"
+      },
+      {
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "color": "rgb(0, 72, 255)",
+        "padding": "8px",
+        "textDecoration": "none"
+      }
+    ],
+    "card": {
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "borderRadius": "0px",
+      "border": "0px none rgb(33, 37, 41)",
+      "boxShadow": "none",
+      "padding": "0px 0px 0px 0px",
+      "margin": "0px",
+      "width": "942px",
+      "display": "flex",
+      "gap": "normal",
+      "flexDirection": "row",
+      "alignItems": "center",
+      "justifyContent": "space-between"
+    },
+    "cardTitle": {
+      "fontSize": "24px",
+      "fontWeight": "600",
+      "color": "rgb(17, 17, 17)",
+      "fontFamily": "Inter, sans-serif",
+      "lineHeight": "28.8px",
+      "margin": "0px 0px 8px"
+    },
+    "button": {
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "color": "rgba(0, 0, 0, 0.65)",
+      "borderRadius": "6px",
+      "border": "0px none rgba(0, 0, 0, 0.65)",
+      "padding": "0px 20px 0px 0px",
+      "fontSize": "20px",
+      "fontWeight": "400",
+      "boxShadow": "none",
+      "display": "none",
+      "cursor": "pointer"
+    },
+    "container": {
+      "display": "flex",
+      "gridTemplateColumns": "none",
+      "gridTemplateRows": "none",
+      "gap": "normal",
+      "maxWidth": "1320px",
+      "padding": "0px 12px 0px 12px",
+      "margin": "0px 60px",
+      "width": "1320px"
+    },
+    "body": {
+      "backgroundColor": "rgb(255, 255, 255)",
+      "fontFamily": "Inter, sans-serif",
+      "color": "rgb(33, 37, 41)"
+    },
+    "sidebar": {
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "padding": "0px 0px 0px 0px",
+      "width": "298px",
+      "borderRight": "0px none rgb(34, 34, 34)"
+    }
+  },
+  "success": true
+}

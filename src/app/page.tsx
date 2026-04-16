@@ -14,62 +14,56 @@ const featuredTools = toolsData
 // Top voted tools
 const topTools = [...toolsData].sort((a, b) => b.votes - a.votes).slice(0, 10);
 
+const pricingColors: Record<string, string> = {
+  Free: "free-badge",
+  Paid: "paid-badge",
+  Freemium: "freemium-badge",
+  Featured: "featured-badge",
+  Trial: "trial-badge",
+};
+
 function ToolCard({ tool, index }: { tool: typeof toolsData[0]; index: number }) {
-  const pricingColors: Record<string, string> = {
-    Free: "bg-emerald-500/10 text-emerald-500",
-    Paid: "bg-amber-500/10 text-amber-500",
-    Freemium: "bg-blue-500/10 text-blue-500",
-    Featured: "bg-violet-500/10 text-violet-500",
-    Trial: "bg-orange-500/10 text-orange-500",
-  };
-  const color = pricingColors[tool.pricing] || "bg-muted text-muted-foreground";
+  const colorClass = pricingColors[tool.pricing] || "free-badge";
 
   return (
-    <Link
-      href={`/tool/${tool.slug}`}
-      className="group flex flex-col gap-3 rounded-xl border border-border/50 bg-card p-5 hover:border-violet-500/30 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-200"
-    >
-      <div className="flex items-start justify-between gap-2">
-        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-violet-600/20 to-fuchsia-600/20 text-violet-500 font-bold text-sm shrink-0">
+    <Link href={`/tool/${tool.slug}`} className="tool-card group">
+      <div className="tool-card-header">
+        <div className="tool-card-icon">
           {tool.name.slice(0, 2).toUpperCase()}
         </div>
-        <span className={`text-xs font-medium px-2 py-0.5 rounded-full shrink-0 ${color}`}>
+        <span className={`tool-card-badge ${colorClass}`}>
           {tool.pricing}
         </span>
       </div>
-      <div>
-        <h3 className="font-semibold text-sm group-hover:text-violet-500 transition-colors">{tool.name}</h3>
-        <p className="text-xs text-muted-foreground mt-1 line-clamp-2 leading-relaxed">{tool.desc}</p>
+      <div className="tool-card-body">
+        <h3 className="tool-card-title">{tool.name}</h3>
+        <p className="tool-card-desc">{tool.desc}</p>
       </div>
-      <div className="flex items-center gap-3 text-xs text-muted-foreground mt-auto">
-        <span className="bg-muted px-2 py-0.5 rounded text-xs">{tool.category}</span>
-        <span className="ml-auto">↑ {tool.votes}</span>
+      <div className="tool-card-footer">
+        <span className="tool-card-category">{tool.category}</span>
+        <span className="tool-card-votes">↑ {tool.votes}</span>
       </div>
     </Link>
   );
 }
 
 function LeaderboardItem({ tool, index }: { tool: typeof toolsData[0]; index: number }) {
+  const medalColors = ["text-amber-400", "text-slate-300", "text-amber-600", "text-muted-foreground"];
   return (
-    <Link
-      href={`/tool/${tool.slug}`}
-      className="flex items-center gap-3 p-3 rounded-lg hover:bg-muted/50 transition-colors group"
-    >
-      <span className={`text-lg font-bold w-6 text-center shrink-0 ${
-        index === 0 ? "text-amber-400" : index === 1 ? "text-slate-300" : index === 2 ? "text-amber-600" : "text-muted-foreground"
-      }`}>
+    <Link href={`/tool/${tool.slug}`} className="leaderboard-item group">
+      <span className={`leaderboard-rank ${medalColors[index] || medalColors[3]}`}>
         {index + 1}
       </span>
-      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-violet-600/20 to-fuchsia-600/20 text-violet-500 font-bold text-xs shrink-0">
+      <div className="leaderboard-icon">
         {tool.name.slice(0, 2).toUpperCase()}
       </div>
-      <div className="min-w-0 flex-1">
-        <p className="text-sm font-medium group-hover:text-violet-500 transition-colors truncate">{tool.name}</p>
-        <p className="text-xs text-muted-foreground truncate">{tool.category}</p>
+      <div className="leaderboard-info">
+        <p className="leaderboard-name">{tool.name}</p>
+        <p className="leaderboard-cat">{tool.category}</p>
       </div>
-      <div className="text-right shrink-0">
-        <span className="text-sm font-semibold text-violet-500">↑ {tool.votes}</span>
-        <p className="text-xs text-muted-foreground">{tool.pricing}</p>
+      <div className="leaderboard-stats">
+        <span className="leaderboard-votes">↑ {tool.votes}</span>
+        <span className="leaderboard-pricing">{tool.pricing}</span>
       </div>
     </Link>
   );
@@ -88,63 +82,559 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col gap-16 pb-16">
-      {/* Hero */}
-      <section className="relative overflow-hidden px-4 sm:px-6 py-20 sm:py-28">
-        {/* Background glow */}
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-violet-600/10 rounded-full blur-3xl" />
-        </div>
+      <style>{`
+        /* ==========================================
+           HERO SECTION - from toolfame.com / turbo0.com
+           ========================================== */
+        .hero-section {
+          background: rgb(15, 15, 18) !important;
+          padding: 96px 0 64px 0 !important;
+          text-align: center !important;
+          position: relative !important;
+          overflow: hidden !important;
+        }
+        .hero-glow {
+          position: absolute !important;
+          top: 50% !important;
+          left: 50% !important;
+          transform: translate(-50%, -50%) !important;
+          width: 600px !important;
+          height: 400px !important;
+          background: radial-gradient(ellipse, rgba(106, 35, 231, 0.12), transparent 70%) !important;
+          pointer-events: none !important;
+          z-index: 0 !important;
+        }
+        .hero-content {
+          position: relative !important;
+          z-index: 1 !important;
+          max-width: 720px !important;
+          margin: 0 auto !important;
+          padding: 0 16px !important;
+        }
+        .hero-badge {
+          display: inline-flex !important;
+          align-items: center !important;
+          gap: 6px !important;
+          border-radius: 100px !important;
+          border: 1px solid rgba(106, 35, 231, 0.3) !important;
+          background: rgba(106, 35, 231, 0.08) !important;
+          padding: 4px 12px !important;
+          font-size: 12px !important;
+          color: #a78bfa !important;
+          margin-bottom: 24px !important;
+          font-weight: 500 !important;
+        }
+        .hero-h1 {
+          font-size: 48px !important;
+          font-weight: 700 !important;
+          line-height: 1.1 !important;
+          letter-spacing: -0.02em !important;
+          color: rgb(240, 238, 232) !important;
+          margin: 0 0 24px 0 !important;
+          text-align: center !important;
+        }
+        .hero-gradient {
+          background: linear-gradient(135deg, #a855f7, #ec4899) !important;
+          -webkit-background-clip: text !important;
+          -webkit-text-fill-color: transparent !important;
+          background-clip: text !important;
+        }
+        .hero-subtitle {
+          font-size: 18px !important;
+          color: rgb(107, 114, 128) !important;
+          line-height: 1.6 !important;
+          margin: 0 0 40px 0 !important;
+          max-width: 560px !important;
+          margin-left: auto !important;
+          margin-right: auto !important;
+        }
 
-        <div className="mx-auto max-w-3xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-1 text-xs text-violet-500 mb-6">
-            <span>🔥</span> 29 tools submitted today
+        /* ==========================================
+           SEARCH - from toolfame.com (dark adapted)
+           ========================================== */
+        .hero-search-form {
+          position: relative !important;
+          width: 100% !important;
+          max-width: 600px !important;
+          margin: 0 auto !important;
+        }
+        .hero-search-input {
+          width: 100% !important;
+          height: 52px !important;
+          border-radius: 12px !important;
+          border: 1px solid rgb(40, 40, 50) !important;
+          background: rgb(22, 22, 28) !important;
+          padding: 14px 20px !important;
+          padding-left: 48px !important;
+          font-size: 15px !important;
+          color: rgb(240, 238, 232) !important;
+          outline: none !important;
+          box-shadow: none !important;
+          transition: border-color 0.15s ease !important;
+        }
+        .hero-search-input::placeholder {
+          color: rgb(107, 114, 128) !important;
+        }
+        .hero-search-input:focus {
+          border-color: #6a23e7 !important;
+        }
+        .hero-search-icon {
+          position: absolute !important;
+          left: 16px !important;
+          top: 50% !important;
+          transform: translateY(-50%) !important;
+          width: 18px !important;
+          height: 18px !important;
+          color: rgb(107, 114, 128) !important;
+          pointer-events: none !important;
+        }
+        .hero-stats {
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          gap: 32px !important;
+          margin-top: 24px !important;
+          font-size: 14px !important;
+        }
+        .hero-stat-strong {
+          font-weight: 600 !important;
+          color: rgb(240, 238, 232) !important;
+        }
+        .hero-stat-label {
+          color: rgb(107, 114, 128) !important;
+        }
+
+        /* ==========================================
+           SECTION HEADERS
+           ========================================== */
+        .section-header {
+          display: flex !important;
+          align-items: center !important;
+          justify-content: space-between !important;
+          margin-bottom: 24px !important;
+        }
+        .section-title {
+          font-size: 20px !important;
+          font-weight: 600 !important;
+          color: rgb(240, 238, 232) !important;
+          margin: 0 0 4px 0 !important;
+        }
+        .section-subtitle {
+          font-size: 14px !important;
+          color: rgb(107, 114, 128) !important;
+          margin: 0 !important;
+        }
+        .section-link {
+          font-size: 13px !important;
+          color: #a78bfa !important;
+          text-decoration: none !important;
+          transition: color 0.15s ease !important;
+          white-space: nowrap !important;
+          flex-shrink: 0 !important;
+        }
+        .section-link:hover {
+          color: #c4b5fd !important;
+        }
+
+        /* ==========================================
+           TOOL CARDS - from dang.ai card style (dark)
+           ========================================== */
+        .tool-card {
+          display: flex !important;
+          flex-direction: column !important;
+          gap: 12px !important;
+          background: rgb(22, 22, 28) !important;
+          border: 1px solid rgb(40, 40, 50) !important;
+          border-radius: 12px !important;
+          padding: 20px !important;
+          text-decoration: none !important;
+          transition: all 0.2s ease !important;
+          cursor: pointer !important;
+        }
+        .tool-card:hover {
+          border-color: #6a23e7 !important;
+          transform: translateY(-2px) !important;
+          box-shadow: 0 8px 32px rgba(106, 35, 231, 0.15) !important;
+        }
+        .tool-card-header {
+          display: flex !important;
+          align-items: flex-start !important;
+          justify-content: space-between !important;
+          gap: 8px !important;
+        }
+        .tool-card-icon {
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          width: 40px !important;
+          height: 40px !important;
+          border-radius: 8px !important;
+          background: rgba(106, 35, 231, 0.15) !important;
+          color: #a78bfa !important;
+          font-weight: 700 !important;
+          font-size: 13px !important;
+          flex-shrink: 0 !important;
+        }
+        .tool-card-badge {
+          font-size: 11px !important;
+          font-weight: 500 !important;
+          padding: 2px 10px !important;
+          border-radius: 100px !important;
+          flex-shrink: 0 !important;
+        }
+        .free-badge { background: rgba(16, 185, 129, 0.1) !important; color: #34d399 !important; }
+        .paid-badge { background: rgba(245, 158, 11, 0.1) !important; color: #fbbf24 !important; }
+        .freemium-badge { background: rgba(59, 130, 246, 0.1) !important; color: #60a5fa !important; }
+        .featured-badge { background: rgba(106, 35, 231, 0.1) !important; color: #a78bfa !important; }
+        .trial-badge { background: rgba(249, 115, 22, 0.1) !important; color: #fb923c !important; }
+
+        .tool-card-body {
+          flex: 1 !important;
+          min-width: 0 !important;
+        }
+        .tool-card-title {
+          font-size: 15px !important;
+          font-weight: 600 !important;
+          color: rgb(240, 238, 232) !important;
+          margin: 0 0 6px 0 !important;
+          line-height: 1.4 !important;
+          transition: color 0.15s ease !important;
+        }
+        .tool-card:hover .tool-card-title {
+          color: #a78bfa !important;
+        }
+        .tool-card-desc {
+          font-size: 13px !important;
+          color: rgb(107, 114, 128) !important;
+          line-height: 1.5 !important;
+          margin: 0 !important;
+          display: -webkit-box !important;
+          -webkit-line-clamp: 2 !important;
+          -webkit-box-orient: vertical !important;
+          overflow: hidden !important;
+        }
+        .tool-card-footer {
+          display: flex !important;
+          align-items: center !important;
+          justify-content: space-between !important;
+          gap: 8px !important;
+          margin-top: auto !important;
+          padding-top: 4px !important;
+        }
+        .tool-card-category {
+          font-size: 12px !important;
+          color: rgb(107, 114, 128) !important;
+          background: rgb(30, 30, 38) !important;
+          padding: 2px 8px !important;
+          border-radius: 6px !important;
+        }
+        .tool-card-votes {
+          font-size: 13px !important;
+          color: rgb(107, 114, 128) !important;
+          font-weight: 500 !important;
+        }
+
+        /* ==========================================
+           GRID LAYOUTS - from toolfame.com
+           ========================================== */
+        .page-container {
+          max-width: 1280px !important;
+          padding: 0 16px !important;
+          margin: 0 auto !important;
+        }
+        .section-gap {
+          padding: 0 16px !important;
+        }
+        .tools-grid-3 {
+          display: grid !important;
+          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+          gap: 16px !important;
+        }
+        .tools-grid-2 {
+          display: grid !important;
+          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+          gap: 12px !important;
+        }
+        .categories-grid {
+          display: grid !important;
+          grid-template-columns: repeat(2, 1fr) !important;
+          gap: 12px !important;
+        }
+        @media (min-width: 640px) {
+          .categories-grid { grid-template-columns: repeat(3, 1fr) !important; }
+        }
+        @media (min-width: 768px) {
+          .categories-grid { grid-template-columns: repeat(4, 1fr) !important; }
+        }
+        @media (min-width: 1024px) {
+          .categories-grid { grid-template-columns: repeat(6, 1fr) !important; }
+        }
+
+        /* ==========================================
+           LEADERBOARD - from dofollow.tools style
+           ========================================== */
+        .leaderboard-panel {
+          border: 1px solid rgb(40, 40, 50) !important;
+          border-radius: 12px !important;
+          background: rgb(22, 22, 28) !important;
+          overflow: hidden !important;
+        }
+        .leaderboard-item {
+          display: flex !important;
+          align-items: center !important;
+          gap: 12px !important;
+          padding: 12px 16px !important;
+          text-decoration: none !important;
+          transition: background 0.15s ease !important;
+          border-bottom: 1px solid rgb(40, 40, 50) !important;
+        }
+        .leaderboard-item:last-child {
+          border-bottom: none !important;
+        }
+        .leaderboard-item:hover {
+          background: rgb(30, 30, 38) !important;
+        }
+        .leaderboard-rank {
+          font-size: 16px !important;
+          font-weight: 700 !important;
+          width: 24px !important;
+          text-align: center !important;
+          flex-shrink: 0 !important;
+        }
+        .leaderboard-icon {
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          width: 36px !important;
+          height: 36px !important;
+          border-radius: 8px !important;
+          background: rgba(106, 35, 231, 0.15) !important;
+          color: #a78bfa !important;
+          font-weight: 700 !important;
+          font-size: 11px !important;
+          flex-shrink: 0 !important;
+        }
+        .leaderboard-info {
+          flex: 1 !important;
+          min-width: 0 !important;
+        }
+        .leaderboard-name {
+          font-size: 14px !important;
+          font-weight: 500 !important;
+          color: rgb(240, 238, 232) !important;
+          margin: 0 0 2px 0 !important;
+          white-space: nowrap !important;
+          overflow: hidden !important;
+          text-overflow: ellipsis !important;
+          transition: color 0.15s ease !important;
+        }
+        .leaderboard-item:hover .leaderboard-name {
+          color: #a78bfa !important;
+        }
+        .leaderboard-cat {
+          font-size: 12px !important;
+          color: rgb(107, 114, 128) !important;
+          margin: 0 !important;
+          white-space: nowrap !important;
+          overflow: hidden !important;
+          text-overflow: ellipsis !important;
+        }
+        .leaderboard-stats {
+          text-align: right !important;
+          flex-shrink: 0 !important;
+        }
+        .leaderboard-votes {
+          display: block !important;
+          font-size: 14px !important;
+          font-weight: 600 !important;
+          color: #a78bfa !important;
+        }
+        .leaderboard-pricing {
+          display: block !important;
+          font-size: 11px !important;
+          color: rgb(107, 114, 128) !important;
+        }
+
+        /* ==========================================
+           TWO-COLUMN LAYOUT
+           ========================================== */
+        .two-col-layout {
+          display: grid !important;
+          grid-template-columns: 1fr !important;
+          gap: 32px !important;
+        }
+        @media (min-width: 1024px) {
+          .two-col-layout { grid-template-columns: 2fr 1fr !important; }
+        }
+
+        /* ==========================================
+           CATEGORY CARDS
+           ========================================== */
+        .category-card {
+          display: flex !important;
+          flex-direction: column !important;
+          align-items: center !important;
+          gap: 8px !important;
+          padding: 16px !important;
+          border-radius: 12px !important;
+          border: 1px solid rgb(40, 40, 50) !important;
+          background: rgb(22, 22, 28) !important;
+          text-decoration: none !important;
+          text-align: center !important;
+          transition: all 0.2s ease !important;
+        }
+        .category-card:hover {
+          border-color: #6a23e7 !important;
+          box-shadow: 0 4px 20px rgba(106, 35, 231, 0.1) !important;
+        }
+        .category-icon {
+          font-size: 24px !important;
+        }
+        .category-name {
+          font-size: 12px !important;
+          font-weight: 500 !important;
+          color: rgb(240, 238, 232) !important;
+          transition: color 0.15s ease !important;
+        }
+        .category-card:hover .category-name {
+          color: #a78bfa !important;
+        }
+        .category-count {
+          font-size: 11px !important;
+          color: rgb(107, 114, 128) !important;
+        }
+
+        /* ==========================================
+           NEWSLETTER - from toolfame.com style
+           ========================================== */
+        .newsletter-section {
+          padding: 0 16px !important;
+        }
+        .newsletter-card {
+          max-width: 672px !important;
+          margin: 0 auto !important;
+          border-radius: 16px !important;
+          border: 1px solid rgba(106, 35, 231, 0.3) !important;
+          background: linear-gradient(180deg, rgba(106, 35, 231, 0.05), rgba(236, 72, 153, 0.05)) !important;
+          padding: 40px 32px !important;
+          text-align: center !important;
+          position: relative !important;
+          overflow: hidden !important;
+        }
+        .newsletter-glow {
+          position: absolute !important;
+          top: 0 !important;
+          left: 50% !important;
+          transform: translateX(-50%) !important;
+          width: 400px !important;
+          height: 200px !important;
+          background: radial-gradient(ellipse, rgba(106, 35, 231, 0.2), transparent 70%) !important;
+          pointer-events: none !important;
+        }
+        .newsletter-title {
+          font-size: 20px !important;
+          font-weight: 600 !important;
+          color: rgb(240, 238, 232) !important;
+          margin: 0 0 8px 0 !important;
+          position: relative !important;
+        }
+        .newsletter-desc {
+          font-size: 14px !important;
+          color: rgb(107, 114, 128) !important;
+          margin: 0 0 24px 0 !important;
+          position: relative !important;
+        }
+        .newsletter-form {
+          display: flex !important;
+          gap: 8px !important;
+          max-width: 400px !important;
+          margin: 0 auto !important;
+          position: relative !important;
+        }
+        .newsletter-input {
+          flex: 1 !important;
+          height: 40px !important;
+          padding: 0 12px !important;
+          border-radius: 8px !important;
+          border: 1px solid rgb(40, 40, 50) !important;
+          background: rgb(22, 22, 28) !important;
+          font-size: 14px !important;
+          color: rgb(240, 238, 232) !important;
+          outline: none !important;
+        }
+        .newsletter-input::placeholder {
+          color: rgb(107, 114, 128) !important;
+        }
+        .newsletter-input:focus {
+          border-color: #6a23e7 !important;
+        }
+        .newsletter-btn {
+          height: 40px !important;
+          padding: 0 20px !important;
+          border-radius: 8px !important;
+          background: #6a23e7 !important;
+          color: white !important;
+          font-size: 14px !important;
+          font-weight: 500 !important;
+          border: none !important;
+          cursor: pointer !important;
+          white-space: nowrap !important;
+          transition: background 0.15s ease !important;
+        }
+        .newsletter-btn:hover {
+          background: #7c3aed !important;
+        }
+      `}</style>
+
+      {/* Hero */}
+      <section className="hero-section">
+        <div className="hero-glow" />
+        <div className="hero-content">
+          <div className="hero-badge">
+            <span>🔥</span> {toolsData.length}+ tools in directory
           </div>
-          <h1 className="text-4xl sm:text-6xl font-bold tracking-tight leading-tight">
+          <h1 className="hero-h1">
             Discover the Best<br />
-            <span className="bg-gradient-to-r from-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
-              AI Tools & SaaS
-            </span>
+            <span className="hero-gradient">AI Tools & SaaS</span>
           </h1>
-          <p className="mt-4 text-base sm:text-lg text-muted-foreground max-w-xl mx-auto">
-            A curated directory of {toolsData.length}+ AI tools, productivity apps, and SaaS products for builders and indie makers.
+          <p className="hero-subtitle">
+            A curated directory of AI tools, productivity apps, and SaaS products for builders and indie makers.
           </p>
 
           {/* Search */}
-          <form onSubmit={handleSearch} className="mt-8 relative max-w-xl mx-auto">
+          <form onSubmit={handleSearch} className="hero-search-form">
+            <svg className="hero-search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search AI tools, categories, tags..."
-              className="w-full h-12 pl-12 pr-4 rounded-xl border border-border/50 bg-card text-sm focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500 transition-all"
+              className="hero-search-input"
             />
-            <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
           </form>
 
-          {/* Quick stats */}
-          <div className="flex items-center justify-center gap-8 mt-6 text-sm">
-            <span><strong className="text-foreground">{toolsData.length}+</strong> <span className="text-muted-foreground">Tools</span></span>
-            <span><strong className="text-foreground">{categoriesData.length}</strong> <span className="text-muted-foreground">Categories</span></span>
-            <span><strong className="text-foreground">24K+</strong> <span className="text-muted-foreground">Monthly Visitors</span></span>
+          {/* Stats */}
+          <div className="hero-stats">
+            <span><strong className="hero-stat-strong">{toolsData.length}+</strong> <span className="hero-stat-label">Tools</span></span>
+            <span><strong className="hero-stat-strong">{categoriesData.length}</strong> <span className="hero-stat-label">Categories</span></span>
+            <span><strong className="hero-stat-strong">24K+</strong> <span className="hero-stat-label">Monthly Visitors</span></span>
           </div>
         </div>
       </section>
 
       {/* Featured Tools */}
-      <section className="px-4 sm:px-6">
-        <div className="mx-auto max-w-7xl">
-          <div className="flex items-center justify-between mb-6">
+      <section className="section-gap">
+        <div className="page-container">
+          <div className="section-header">
             <div>
-              <h2 className="text-2xl font-bold">Featured Tools</h2>
-              <p className="text-sm text-muted-foreground mt-1">Hand-picked by our team</p>
+              <h2 className="section-title">Featured Tools</h2>
+              <p className="section-subtitle">Hand-picked by our team</p>
             </div>
-            <Link href="/featured" className="text-sm text-violet-500 hover:text-violet-400 transition-colors">
-              View all →
-            </Link>
+            <Link href="/featured" className="section-link">View all →</Link>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="tools-grid-3">
             {featuredTools.map((tool, i) => (
               <ToolCard key={tool.slug} tool={tool} index={i} />
             ))}
@@ -153,68 +643,60 @@ export default function HomePage() {
       </section>
 
       {/* Two-col layout: Latest Tools + Leaderboard */}
-      <section className="px-4 sm:px-6">
-        <div className="mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Latest tools grid */}
-          <div className="lg:col-span-2">
-            <div className="flex items-center justify-between mb-6">
-              <div>
-                <h2 className="text-2xl font-bold">Latest Tools</h2>
-                <p className="text-sm text-muted-foreground mt-1">Fresh additions to our directory</p>
+      <section className="section-gap">
+        <div className="page-container">
+          <div className="two-col-layout">
+            {/* Latest tools */}
+            <div>
+              <div className="section-header">
+                <div>
+                  <h2 className="section-title">Latest Tools</h2>
+                  <p className="section-subtitle">Fresh additions to our directory</p>
+                </div>
+                <Link href="/tools" className="section-link">View all →</Link>
               </div>
-              <Link href="/tools" className="text-sm text-violet-500 hover:text-violet-400 transition-colors">
-                View all →
-              </Link>
+              <div className="tools-grid-2">
+                {toolsData.slice(0, 8).map((tool, i) => (
+                  <ToolCard key={tool.slug} tool={tool} index={i} />
+                ))}
+              </div>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {toolsData.slice(0, 8).map((tool, i) => (
-                <ToolCard key={tool.slug} tool={tool} index={i} />
-              ))}
-            </div>
-          </div>
 
-          {/* Leaderboard */}
-          <div>
-            <div className="flex items-center justify-between mb-6">
-              <div>
-                <h2 className="text-2xl font-bold">🏆 Leaderboard</h2>
-                <p className="text-sm text-muted-foreground mt-1">Top voted this week</p>
+            {/* Leaderboard */}
+            <div>
+              <div className="section-header">
+                <div>
+                  <h2 className="section-title">🏆 Leaderboard</h2>
+                  <p className="section-subtitle">Top voted this week</p>
+                </div>
+                <Link href="/leaderboard" className="section-link">View all →</Link>
               </div>
-              <Link href="/leaderboard" className="text-sm text-violet-500 hover:text-violet-400 transition-colors">
-                View all →
-              </Link>
-            </div>
-            <div className="rounded-xl border border-border/50 bg-card divide-y divide-border/50">
-              {topTools.map((tool, i) => (
-                <LeaderboardItem key={tool.slug} tool={tool} index={i} />
-              ))}
+              <div className="leaderboard-panel">
+                {topTools.map((tool, i) => (
+                  <LeaderboardItem key={tool.slug} tool={tool} index={i} />
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Categories */}
-      <section className="px-4 sm:px-6">
-        <div className="mx-auto max-w-7xl">
-          <div className="flex items-center justify-between mb-6">
+      <section className="section-gap">
+        <div className="page-container">
+          <div className="section-header">
             <div>
-              <h2 className="text-2xl font-bold">Browse Categories</h2>
-              <p className="text-sm text-muted-foreground mt-1">Find tools by category</p>
+              <h2 className="section-title">Browse Categories</h2>
+              <p className="section-subtitle">Find tools by category</p>
             </div>
-            <Link href="/categories" className="text-sm text-violet-500 hover:text-violet-400 transition-colors">
-              All categories →
-            </Link>
+            <Link href="/categories" className="section-link">All categories →</Link>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+          <div className="categories-grid">
             {categoriesData.map((cat) => (
-              <Link
-                key={cat.slug}
-                href={`/category/${cat.slug}`}
-                className="flex flex-col items-center gap-2 p-4 rounded-xl border border-border/50 bg-card hover:border-violet-500/30 hover:shadow-md hover:shadow-violet-500/5 transition-all text-center group"
-              >
-                <span className="text-2xl">{cat.icon}</span>
-                <span className="text-xs font-medium group-hover:text-violet-500 transition-colors">{cat.name}</span>
-                <span className="text-xs text-muted-foreground">{cat.count}</span>
+              <Link key={cat.slug} href={`/category/${cat.slug}`} className="category-card">
+                <span className="category-icon">{cat.icon}</span>
+                <span className="category-name">{cat.name}</span>
+                <span className="category-count">{cat.count}</span>
               </Link>
             ))}
           </div>
@@ -222,25 +704,15 @@ export default function HomePage() {
       </section>
 
       {/* Newsletter */}
-      <section className="px-4 sm:px-6">
-        <div className="mx-auto max-w-2xl">
-          <div className="relative rounded-2xl border border-violet-500/20 bg-gradient-to-b from-violet-600/5 to-fuchsia-600/5 p-8 sm:p-12 text-center overflow-hidden">
-            <div className="absolute inset-0 -z-10 opacity-20">
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-48 bg-violet-600/30 rounded-full blur-3xl" />
-            </div>
-            <h2 className="text-2xl font-bold">Get the best tools in your inbox</h2>
-            <p className="mt-2 text-sm text-muted-foreground">Weekly curated list of the hottest AI tools and indie products. No spam.</p>
-            <form className="mt-6 flex gap-2 max-w-sm mx-auto" onSubmit={(e) => e.preventDefault()}>
-              <input
-                type="email"
-                placeholder="your@email.com"
-                className="flex-1 h-10 px-3 rounded-lg border border-border/50 bg-background text-sm focus:outline-none focus:ring-2 focus:ring-violet-500/50"
-              />
-              <button type="submit" className="h-10 px-5 rounded-lg bg-violet-600 hover:bg-violet-700 text-white text-sm font-medium transition-colors whitespace-nowrap">
-                Subscribe
-              </button>
-            </form>
-          </div>
+      <section className="newsletter-section">
+        <div className="newsletter-card">
+          <div className="newsletter-glow" />
+          <h2 className="newsletter-title">Get the best tools in your inbox</h2>
+          <p className="newsletter-desc">Weekly curated list of the hottest AI tools and indie products. No spam.</p>
+          <form className="newsletter-form" onSubmit={(e) => e.preventDefault()}>
+            <input type="email" placeholder="your@email.com" className="newsletter-input" />
+            <button type="submit" className="newsletter-btn">Subscribe</button>
+          </form>
         </div>
       </section>
     </div>
